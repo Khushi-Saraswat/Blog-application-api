@@ -1,58 +1,122 @@
-# #Blog Application 🚀
-This is a blog application developed using Spring Boot, Java, MySQL, Hibernate, JPA, Spring Security, and JWT. It allows users to create, read, update, and delete blog posts.
-
-# Features
-User authentication and authorization using Spring Security and JWT.
-CRUD operations for managing blog posts.
-Secure endpoints to ensure data integrity.
-MySQL database integration for data persistence.
-Robust error handling and validation mechanisms.
-Integration with Postman for API testing.
-
-# Technologies Used
-- Java
-- Spring Boot
-- MySQL
-- Hibernate
-- JPA (Java Persistence API)
-- Spring Framework
-- Spring Security
-- JWT (JSON Web Tokens)
-- Eclipse (IDE)
-- Postman (API Testing)
-- Web Browser
-- Getting Started
-To get started with this project, ensure you have Java, MySQL, and Maven installed on your system.
-
-# Installation
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/Khushi-Saraswat/Blog-application-api.git
-Navigate to the project directory:
-bash
-Copy code
-cd blog-application
-Update the application.properties file with your MySQL database configuration:
-
-# properties
-Copy code
-spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
-spring.datasource.username=your_mysql_username
-spring.datasource.password=your_mysql_password
-
-# Contributing
-Contributions are welcome! Please feel free to open a pull request or submit an issue for any bugs, feature requests, or enhancements.
-
-# ER Diagram -> 
-
-<img width="488" alt="Screenshot 2024-02-17 at 12 21 49 AM" src="https://github.com/gaurav637/Blog-Application-Using-Spring-Boot/assets/141955844/4cdb1384-e0a8-47b6-9c55-4c39978039ec">
-
-# POSTMAN ALL REQUESTS
 
 
-<img width="1280" alt="Screenshot 2024-02-17 at 12 41 15 AM" src="https://github.com/gaurav637/Blog-Application-Using-Spring-Boot/assets/141955844/02157410-e72d-4f13-988e-ce5a606eb1ba">
+---
 
-# DATABASE
+# 🚀 Blog Application - Spring Boot Project
 
-<img width="688" alt="Screenshot 2024-02-20 at 10 07 09 PM" src="https://github.com/gaurav637/Blog-Application-Using-Spring-Boot/assets/141955844/17633ea7-5039-466d-bdeb-6fd6e43e56e7">
+This Blog Application is a robust backend system built using **Spring Boot**, tailored for managing blog posts, categories, and user interactions. It integrates several advanced features including NLP-based comment moderation, content scheduling, SEO-friendly slugs, PDF exporting, and estimated read-time—all making it an ideal showcase for Java backend development.
+
+---
+
+## 🔐 Authentication & Authorization
+
+> 🛠 **In Progress**
+
+- **JWT (JSON Web Token)** (Planned):  
+  Secure authentication using token-based sessions for stateless REST APIs. Each login returns a signed token, which is required to access protected endpoints.
+
+- **Role-Based Access Control (RBAC)** (Planned):  
+  Fine-grained access will be managed based on user roles like `ADMIN`, `AUTHOR`, and `READER`. Specific permissions will be applied on routes like post creation, comment approval, etc.
+
+---
+
+## 🚦 Core Features
+
+### 📝 Post Management
+- **CRUD Operations**: Users can create, edit, delete, and fetch blog posts.
+- **Slug URLs**: Every post and category has a **slug** field (e.g., `my-first-post`), which is used to generate SEO-friendly and human-readable URLs.
+- **PDF Export**: Posts can be exported as PDF documents using libraries like **Apache PDFBox** or **iText**.
+- **Read Time Estimation**: Automatically estimates the reading time of a post based on word count (average reading speed: 200 words/min).
+
+---
+
+### ⏰ Scheduled Publishing
+
+> ✅ **Implemented using Spring Scheduler**
+
+- You can schedule a post to be **published at a future date/time** using a timestamp.
+- This is achieved using Spring’s `@Scheduled` and a background task that checks draft posts for their scheduled publish time.
+- A cron job or fixed delay periodically runs in the background, and when the current time matches the scheduled time, the post's status changes from `DRAFT` to `PUBLISHED`.
+
+---
+
+### 📚 Category Management
+
+- **Slug Generation**: Generates slug from the category name (e.g., "Java Basics" → `java-basics`) for clean URLs.
+- **Soft Delete**: Instead of deleting categories from the DB, a flag (`deleted = true`) is used. This allows admins to **restore** them if needed.
+
+---
+
+### 💬 Comment System
+
+- **Like/Dislike**: Users can express their opinion on each comment.
+  
+### 🧠 Comment Moderation with Stanford NLP
+
+> ✅ **Implemented using Stanford CoreNLP**
+
+- Every comment submitted is passed through **Stanford NLP**'s sentiment and toxicity analysis.
+- If inappropriate or toxic content is detected:
+  - The comment is flagged as **"Pending Approval"**.
+  - Only users with **admin role** can review and approve/reject such comments.
+- Stanford NLP helps maintain a safe and respectful environment on the platform.
+
+---
+
+## 📌 Summary of Key Functionalities
+
+| Feature                        | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| **Slug URLs**                 | Slug fields help generate clean, SEO-friendly URLs.                         |
+| **Soft Delete with Restore**  | Deleted items are only hidden and can be recovered later.                   |
+| **PDF Export**                 | Posts can be downloaded as PDF files.                                       |
+| **Estimated Read Time**        | Automatically calculates how long a blog takes to read.                     |
+| **Comment Moderation**         | Powered by Stanford NLP for toxicity detection.                             |
+| **Like/Dislike on Comments**   | Adds interactivity and engagement.                                          |
+| **Scheduled Publishing**       | Automatically publishes posts at a specified date/time.                     |
+| **JWT Authentication**         | 🔧 In Progress: Token-based login system.                                   |
+| **Role-Based Access Control**  | 🔧 In Progress: Permissions will vary by user role (Admin, Author, Reader). |
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend**: Spring Boot  
+- **Security**: Spring Security, JWT (Planned)  
+- **Database**: MySQL  
+- **ORM**: Hibernate & JPA  
+- **NLP Engine**: Stanford CoreNLP  
+- **PDF Export**: Apache PDFBox / iText  
+- **Task Scheduler**: Spring `@Scheduled`  
+- **IDE**: Vs Code
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the Repository**  
+```bash
+git clone https://github.com/your-username/blog-application-springboot.git
+cd blog-application-springboot
+```
+
+2. **Update MySQL Configuration**
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/your_db
+spring.datasource.username=root
+spring.datasource.password=your_password
+```
+
+3. **Run the Application**
+```bash
+mvn spring-boot:run
+```
+
+---
+
+## 🙌 Contribution
+
+Pull requests are welcome. If you’d like to contribute, fork the repo and submit changes via a pull request. For suggestions, feel free to open issues.
+
+---
+
