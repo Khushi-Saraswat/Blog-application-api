@@ -92,6 +92,75 @@ This Blog Application is a robust backend system built using **Spring Boot**, ta
 
 ---
 
+
+## er-diagram
+ +--------------------+         +--------------------+
+|      Category      |1       *|       Post         |
+|--------------------|---------|--------------------|
+| id (PK)            |         | postId (PK)        |
+| categoryTitle      |         | title              |
+| categoryDescription|         | content            |
+| slug               |         | imageName          |
+| isDeleted          |         | uploadDate         |
++--------------------+         | scheduledAt        |
+                               | createdAt          |
+                               | updatedAt          |
+                               | readAt             |
+                               | status             |
+                               | category_id (FK)   |
+                               | user_id (FK)       |
+                               +--------------------+
+                                        |1
+                                        |
+                                      * |
+                                +----------------+
+                                |     Comment     |
+                                |----------------|
+                                | id (PK)        |
+                                | content        |
+                                | likeCount      |
+                                | dislikeCount   |
+                                | post_id (FK)   |
+                                +----------------+
+                                        |1
+                                        |
+                                      * |
+                                +-----------------------+
+                                |   CommentReaction     |
+                                |-----------------------|
+                                | id (PK)               |
+                                | reactionType (LIKE/..)|
+                                | user_id (FK)          |
+                                | comment_id (FK)       |
+                                +-----------------------+
+
++--------------------+
+|       User         |
+|--------------------|
+| id (PK)            |
+| name               |
+| email              |
+| password           |
+| about              |
+| role (ENUM)        |
++--------------------+
+        |1
+        |
+      * |
++----------------+
+|     Post       |
+|----------------|
+| user_id (FK)   |
++----------------+
+        |
+      * |
++----------------------+
+|  CommentReaction     |
+|----------------------|
+| user_id (FK)         |
++----------------------+
+
+
 ## 🚀 Getting Started
 
 1. **Clone the Repository**  
